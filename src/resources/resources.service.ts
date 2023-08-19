@@ -1,24 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Resource } from './schemas/resource.schema';
+import { CreateResourceDTO } from './dto/resources.dto';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ResourcesService {
-    getAll(){
-        return 'Obtener todos los recursos';
+    constructor(
+        @InjectModel(Resource.name) 
+        private resourceModel: Model<Resource>
+    ){}
+
+    async getAll(): Promise<Resource[]>{
+        const resources = await this.resourceModel.find();
+        return resources;
     }
 
-    getOne(id: number){
-        return `Obtener un recurso ${id}`;
+    async getOne(id: string): Promise <Resource>{        
+        const resource = await this.resourceModel.findById(id);
+        return resource;
     }
 
-    create(payload: any){
-        return 'Crear un recurso';
+    async create(newResouse: CreateResourceDTO): Promise<Resource>{
+        const resource = await new this.resourceModel(newResouse);
+        return resource.save();
+    }        
+
+    async update(id: string, updateResource: CreateResourceDTO){
+        const resource = await this.resourceModel.findByIdAndUpdate(id, updateResource, {new: true});
+        return resource;
     }
 
-    update(id: number, payload: any){
-        return `Actualizar un recurso ${id}`;
-    }
-
-    delete(id: number){
-        return `Eliminar un recurso ${id}`;
+    async delete(id: string){
+        const resource = await this.resourceModel.findByIdAndRemove(id);
+        return resource;        
     }
 }

@@ -3,9 +3,10 @@
 export class Resource {    
     name: string;
     description: string;
-    created_at: Date;
-    // created_by: User;
     path: string;
     type: string;
-    size: number;  
+    size: number;
+    created_at: Date;
+    updated_at: Date;
+    // created_by: User;
 }
