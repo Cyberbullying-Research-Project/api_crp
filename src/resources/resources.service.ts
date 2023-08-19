@@ -16,7 +16,7 @@ export class ResourcesService {
         return resources;
     }
 
-    async getOne(id: number): Promise <Resource>{
+    async getOne(id: string): Promise <Resource>{        
         const resource = await this.resourceModel.findById(id);
         return resource;
     }
@@ -26,12 +26,12 @@ export class ResourcesService {
         return resource.save();
     }        
 
-    async update(id: number, updateResource: CreateResourceDTO){
+    async update(id: string, updateResource: CreateResourceDTO){
         const resource = await this.resourceModel.findByIdAndUpdate(id, updateResource, {new: true});
         return resource;
     }
 
-    async delete(id: number){
+    async delete(id: string){
         const resource = await this.resourceModel.findByIdAndRemove(id);
         return resource;        
     }

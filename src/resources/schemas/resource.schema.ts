@@ -19,6 +19,15 @@ export class Resource {
 
     @Prop()
     size: number;
+
+    @Prop()
+    created_by: string;
+
+    @Prop()
+    created_at: Date;
+
+    @Prop()
+    updated_at: Date;
 }
 
 export const ResourceSchema = SchemaFactory.createForClass(Resource);

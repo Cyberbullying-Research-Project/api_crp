@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Put, Patch, Delete, Body, Param } from '@nestjs/common';
 import { ResourcesService } from './resources.service';
+import { CreateResourceDTO } from './dto/resources.dto';
+import { Resource } from './resources.entity';
 
 @Controller('resources')
 export class ResourcesController {
@@ -8,25 +10,30 @@ export class ResourcesController {
     @Get()
     getAll(){
         return this.resourcesService.getAll();
-    }
+    }    
 
     @Get(':id')
-    getOne(id: number){
+    async getOne(@Param('id') id: string):Promise<Resource> {
         return this.resourcesService.getOne(id);
     }
-
+    
     @Post()
-    create(payload: any){
-        return this.resourcesService.create(payload);
+    create(@Body() newResource: CreateResourceDTO){
+        return this.resourcesService.create(newResource);
+    }
+
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updateResource: CreateResourceDTO):Promise<Resource>{
+        return this.resourcesService.update(id, updateResource);
     }
 
     @Put(':id')
-    update(id: number, payload: any){
-        return this.resourcesService.update(id, payload);
+    updatePut(@Param('id') id: string, @Body() updateResource: CreateResourceDTO):Promise<Resource>{
+        return this.resourcesService.update(id, updateResource);
     }
 
-    @Delete(':id')    
-    delete(id: number){
+    @Delete(':id')
+    delete(@Param('id') id: string){
         return this.resourcesService.delete(id);
     }
 }

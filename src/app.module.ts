@@ -3,7 +3,6 @@ import { CategoriesModule } from './categories/categories.module';
 import { NarrativesModule } from './narratives/narratives.module';
 import { PostsModule } from './posts/posts.module';
 import { ResourcesModule } from './resources/resources.module';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -19,8 +18,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     CategoriesModule,
     NarrativesModule, 
     PostsModule, 
-    ResourcesModule, 
-    UsersModule, 
+    ResourcesModule,    
     AuthModule
   ],
   controllers: [],
