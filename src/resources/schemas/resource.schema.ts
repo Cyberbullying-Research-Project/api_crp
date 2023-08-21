@@ -1,4 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
+import { User } from '../../auth/schemas/user.schema';
 
 @Schema({
     timestamps: true
@@ -20,8 +22,8 @@ export class Resource {
     @Prop()
     size: number;
 
-    @Prop()
-    created_by: string;
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User'})
+    created_by: User;
 
     @Prop()
     created_at: Date;
