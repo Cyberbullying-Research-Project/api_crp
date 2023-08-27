@@ -1,19 +1,19 @@
 import { Body, Controller, Post, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SingUpDto } from './dto/singup.dto';
-import { loginDto } from './dto/login.dto';
+import { SignUpDto } from './dto/signup.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) {}
 
     @Post('/signup')
-    singUp(@Body() singUpDto: SingUpDto): Promise<{ token: string }> {
-        return this.authService.singUp(singUpDto);
+    singUp(@Body() singUpDto: SignUpDto): Promise<{ token: string }> {
+        return this.authService.signUp(singUpDto);
     }
 
     @Get('/login')
-    login(@Body() loginDto: loginDto): Promise<{ token: string }> {
+    login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
         return this.authService.login(loginDto);
     }
 

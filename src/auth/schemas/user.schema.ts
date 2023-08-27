@@ -7,6 +7,9 @@ import { Document } from 'mongoose';
 
 export class User extends Document{
     @Prop()
+    _id: string;
+
+    @Prop()
     name: string;
 
     @Prop({ unique: [true, 'Email already exists'] })
@@ -15,7 +18,7 @@ export class User extends Document{
     @Prop()
     password: string;
 
-    /*@Prop()
+    @Prop()
     role: string;
 
     @Prop()
@@ -25,7 +28,7 @@ export class User extends Document{
     createdAt: Date;
 
     @Prop()
-    updatedAt: Date;*/
+    updatedAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
