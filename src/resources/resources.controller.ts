@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Put, Patch, Delete, Body, Param, Query, UseGuards, Req } from '@nestjs/common';
 import { ResourcesService } from './resources.service';
-import { CreateResourceDTO } from './dto/createResources.dto';
+import { CreateResourceDTO } from './dto/createResource.dto';
+import { UpdateResourceDTO } from './dto/updateResource.dto';
 import { Resource } from './resources.entity';
 import { MongoIdPipe } from './resources.pipe';
 import {Query as ExpressQuery} from 'express-serve-static-core';
@@ -23,18 +24,18 @@ export class ResourcesController {
     
     @Post()
     @UseGuards(AuthGuard())    
-    create(@Body() newResource: CreateResourceDTO,@Req() req): Promise<Resource>{        
+    create(@Body() newResource: CreateResourceDTO,@Req() req): Promise<Resource>{
         return this.resourcesService.create(newResource, req.user);
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateResource: CreateResourceDTO):Promise<Resource>{
-        return this.resourcesService.update(id, updateResource);
+    update(@Param('id') id: string, @Body() updateResource: UpdateResourceDTO):Promise<Resource>{
+        return this.resourcesService.updateById(id, updateResource);
     }
 
     @Put(':id')
-    updatePut(@Param('id') id: string, @Body() updateResource: CreateResourceDTO):Promise<Resource>{
-        return this.resourcesService.update(id, updateResource);
+    updatePut(@Param('id') id: string, @Body() updateResource: UpdateResourceDTO):Promise<Resource>{
+        return this.resourcesService.updateById(id, updateResource);
     }
 
     @Delete(':id')
