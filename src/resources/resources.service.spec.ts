@@ -6,6 +6,7 @@ import mongoose, { Document, Model } from "mongoose";
 import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { User } from "../auth/schemas/user.schema";
 import { CreateResourceDTO } from "./dto/createResource.dto";
+import { UpdateResourceDTO } from "./dto/updateResource.dto";
 
 describe('ResourcesService', () => {
     let resourceService: ResourcesService;    
@@ -146,7 +147,7 @@ describe('ResourcesService', () => {
 
             jest.spyOn(model, 'findByIdAndUpdate').mockResolvedValue(updateResource);
 
-            const result = await resourceService.updateById(mockResource._id, resource as any);
+            const result = await resourceService.updateById(mockResource._id, resource as UpdateResourceDTO);
 
             expect(model.findByIdAndUpdate).toHaveBeenCalledWith(mockResource._id, resource, {
                 new: true,
