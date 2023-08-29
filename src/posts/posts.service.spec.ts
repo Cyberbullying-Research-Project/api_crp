@@ -87,7 +87,7 @@ describe('PostsService', () => {
                 posted_by: mockUser._id,
             } as CreatePostDTO;
 
-            jest.spyOn(model, 'create').mockImplementationOnce(()=> Promise.resolve([mockPost]));
+            jest.spyOn(model, 'create').mockImplementationOnce(() => Promise.resolve([mockPost]));
 
             const result = await postService.create(newPost as CreatePostDTO, mockUser as User);            
 
@@ -132,7 +132,7 @@ describe('PostsService', () => {
 
             jest.spyOn(model, 'findByIdAndUpdate').mockResolvedValue(updatePost);
 
-            const result = await postService.updatebyId(mockPost._id, resource as UpdatePostDTO);
+            const result = await postService.updateById(mockPost._id, resource as UpdatePostDTO);
 
             expect(model.findByIdAndUpdate).toHaveBeenCalledWith(mockPost._id, resource, {
                 new: true,

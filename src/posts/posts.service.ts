@@ -41,7 +41,7 @@ export class PostsService {
         return posts;
     }
 
-    async getOne(id: string): Promise<Post>{
+    async getOne(id: string): Promise<GetPostDTO>{
         const isValidId = mongoose.isValidObjectId(id);
 
         if(!isValidId){
@@ -57,19 +57,18 @@ export class PostsService {
         return post;
     }
 
-    async create(newPost: CreatePostDTO, user:User): Promise<Post>{
-        const data = Object.assign(newPost, {created_by: user._id})
+    async create(newPost: CreatePostDTO, user:User): Promise<GetPostDTO>{
+        const data = Object.assign(newPost, { created_by: user._id })
         const post = await this.postModel.create(data);
         return post;
     }
 
-    async updatebyId(id: string, updatePost: UpdatePostDTO): Promise<Post>{
-        
+    async updateById(id: string, updatePost: UpdatePostDTO): Promise<GetPostDTO>{        
         const post = await this.postModel.findByIdAndUpdate(id, updatePost, {new: true, runValidators: true});
         return post;
     }
         
-    async delete(id: string):Promise<Post>{
+    async delete(id: string):Promise<GetPostDTO>{
         const post = await this.postModel.findByIdAndDelete(id);
         return post;
     }
