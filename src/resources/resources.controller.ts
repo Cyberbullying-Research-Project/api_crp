@@ -3,7 +3,6 @@ import { ResourcesService } from './resources.service';
 import { CreateResourceDTO } from './dto/createResource.dto';
 import { UpdateResourceDTO } from './dto/updateResource.dto';
 import { GetResourceDTO } from './dto/getResource.dto';
-import { Resource } from './schemas/resource.schema';
 import { MongoIdPipe } from './resources.pipe';
 import {Query as ExpressQuery} from 'express-serve-static-core';
 import { AuthGuard } from '@nestjs/passport';
@@ -14,7 +13,7 @@ export class ResourcesController {
     constructor(private resourcesService: ResourcesService){}
 
     @Get()
-    // @UseGuards(AuthGuard())
+    // @UseGuards(AuthGuard()) // Uncomment this to enable authentication
     async getAll(@Query() query: ExpressQuery):Promise<GetResourceDTO[]>{
         const resources = await this.resourcesService.getAll(query);
         
@@ -32,7 +31,7 @@ export class ResourcesController {
     }    
 
     @Get(':id')
-    // @UseGuards(AuthGuard())
+    // @UseGuards(AuthGuard()) // Uncomment this to enable authentication
     async getOne(@Param('id', MongoIdPipe) id: string ):Promise<GetResourceDTO> {
         const resource = await this.resourcesService.getOne(id);
 
@@ -50,7 +49,7 @@ export class ResourcesController {
     
     @Post()
     @UseGuards(AuthGuard())
-    async create(@Body() newResource: CreateResourceDTO,@Req() req): Promise<GetResourceDTO>{
+    async create(@Body() newResource: CreateResourceDTO, @Req() req): Promise<GetResourceDTO>{
         const resource = await this.resourcesService.create(newResource, req.user);
 
         const response: GetResourceDTO = {

@@ -33,8 +33,7 @@ export class ResourcesService {
     }
 
     
-    async getOne(id: string): Promise <Resource>{
-        // !Aplicar en los demas metodos con ID
+    async getOne(id: string): Promise <Resource>{        
         const isValidId = mongoose.isValidObjectId(id);
 
         if(!isValidId){

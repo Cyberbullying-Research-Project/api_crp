@@ -62,12 +62,8 @@ describe('ResourcesService', () => {
         it('should return an array of resources', async () => {
             const query = {page:'1', keyword: 'test'};
 
-            jest.spyOn(model, 'find').mockImplementation(
-                ()=>({
-                    limit: ()=>({
-                        skip: jest.fn().mockResolvedValue([mockResource])
-
-                    })
+            jest.spyOn(model, 'find').mockImplementation(() => ({
+                    limit: ()=>({skip: jest.fn().mockResolvedValue([mockResource])})
                 } as any)
             );
             
@@ -142,7 +138,7 @@ describe('ResourcesService', () => {
 
     describe('updateById', () => {
         it('should update a resource by ID', async () => {
-            const updateResource = {...mockResource, name: 'Updated resource'};
+            const updateResource = {...mockResource, name: 'Updated resource'} as UpdateResourceDTO;
             const resource = { name: 'Updated resource'}
 
             jest.spyOn(model, 'findByIdAndUpdate').mockResolvedValue(updateResource);
