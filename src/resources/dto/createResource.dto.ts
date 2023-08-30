@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsEmpty } from 'class-validator';
+import { IsNotEmpty, IsString, IsEmpty, IsNumber, IsDate } from 'class-validator';
 
 export class CreateResourceDTO{
     @IsNotEmpty()
@@ -17,14 +17,15 @@ export class CreateResourceDTO{
     @IsString()    
     readonly type: string;
 
+    @IsNotEmpty()
+    @IsNumber()
     readonly size: number;
 
-    @IsEmpty({message: 'You cannot specify the creator of the resource'})
+    @IsEmpty({message: 'You cannot specify the creator of the resource'})    
     readonly created_by : string;
 
+    @IsEmpty({message: 'You cannot specify the creation date of the resource'})
+    @IsDate()
     readonly created_at: Date;
-
-    readonly updated_at: Date;
-    
 }
 

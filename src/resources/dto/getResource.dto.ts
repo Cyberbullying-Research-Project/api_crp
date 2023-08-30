@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsString, IsNumber, IsDate } from 'class-validator';
+import { IsNotEmpty, IsString, IsDate } from 'class-validator';
 
-export class UpdateResourceDTO{
+export class GetResourceDTO{
     @IsNotEmpty()
     @IsString()    
     readonly name: string;
@@ -17,12 +17,11 @@ export class UpdateResourceDTO{
     @IsString()    
     readonly type: string;
 
-    @IsNotEmpty()
-    @IsNumber()
-    readonly size: number;
-
+    @IsNotEmpty()        
+    readonly created_by : string;
+    
     @IsNotEmpty()
     @IsDate()
-    readonly updated_at: Date;    
+    readonly updated_at: Date;
 }
 

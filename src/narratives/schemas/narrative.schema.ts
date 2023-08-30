@@ -5,27 +5,21 @@ import mongoose, { Document } from 'mongoose';
     timestamps: true
 })
 
-export class Resource extends Document{
+export class Narrative extends Document{
     @Prop()
     _id: string;
 
     @Prop()
-    name: string;
+    title: string;
 
     @Prop()
-    description: string;
-
-    @Prop()
-    path: string;
-
-    @Prop()
-    type: string;
-
-    @Prop()
-    size: number;
+    body: string;
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User'})
     created_by: string;
+
+    @Prop({ type: String, enum: ['DRAFT', 'PUBLISHED', 'DELETED'], default: 'DRAFT' })
+    status:string;
 
     @Prop()
     created_at: Date;
@@ -33,8 +27,9 @@ export class Resource extends Document{
     @Prop()
     updated_at: Date;
 
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Resource'})
+    resources: string[];
+
     @Prop()
     keywords: string[];
 }
-
-export const ResourceSchema = SchemaFactory.createForClass(Resource);
