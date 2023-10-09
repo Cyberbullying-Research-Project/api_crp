@@ -21,8 +21,7 @@ describe('AuthService', () => {
         findOne: jest.fn(),
     }
 
-    const mockUser = {
-        _id: "61c0ccf11d7bf83d153d7c06",
+    const mockUser = {        
         name: "newUser",
         email: "newUser@email.com",
         password: "12345678",
