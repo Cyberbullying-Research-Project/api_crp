@@ -33,3 +33,5 @@ export class Narrative extends Document{
     @Prop()
     keywords: string[];
 }
+
+export const NarrativeSchema = SchemaFactory.createForClass(Narrative);

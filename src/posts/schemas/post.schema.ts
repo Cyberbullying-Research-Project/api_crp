@@ -33,3 +33,5 @@ export class Post extends Document{
     @Prop()
     keywords: string[];
 }
+
+export const PostSchema = SchemaFactory.createForClass(Post);

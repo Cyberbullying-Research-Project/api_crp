@@ -20,6 +20,7 @@ export class PostsController {
             title: resource.title,
             body: resource.body,
             posted_by: resource.posted_by,
+            created_at: resource.created_at,
             updated_at: resource.updated_at,
             // posibly add resources
         }));
@@ -36,6 +37,7 @@ export class PostsController {
             title: resource.title,
             body: resource.body,
             posted_by: resource.posted_by,
+            created_at: resource.created_at,
             updated_at: resource.updated_at,
             // posibly add resources
         }
@@ -52,6 +54,7 @@ export class PostsController {
             title: post.title,
             body: post.body,
             posted_by: post.posted_by,
+            created_at: post.created_at,
             updated_at: post.updated_at,
             // posibly add resources
         }
@@ -62,13 +65,14 @@ export class PostsController {
     @Patch(':id')
     @UseGuards(AuthGuard())
     async update(@Param('id', MongoIdPipe) id: string, @Body() updatePost: UpdatePostDTO): Promise<GetPostDTO>{
-        const resource = await this.postsService.updatebyId(id, updatePost);
+        const resource = await this.postsService.updateById(id, updatePost);
 
         const response: GetPostDTO = {
             _id: resource._id,
             title: resource.title,
             body: resource.body,
             posted_by: resource.posted_by,
+            created_at: resource.created_at,
             updated_at: resource.updated_at,
             // posibly add resources
         }
@@ -79,13 +83,14 @@ export class PostsController {
     @Put(':id')
     @UseGuards(AuthGuard())
     async updatePut(@Param('id', MongoIdPipe) id: string, @Body() updatePost: UpdatePostDTO): Promise<GetPostDTO>{
-        const resource = await this.postsService.updatebyId(id, updatePost);
+        const resource = await this.postsService.updateById(id, updatePost);
 
         const response: GetPostDTO = {
             _id: resource._id,
             title: resource.title,
             body: resource.body,
             posted_by: resource.posted_by,
+            created_at: resource.created_at,
             updated_at: resource.updated_at,
             // posibly add resources
         }
