@@ -13,7 +13,8 @@ import { join } from 'path';
 import { AwsConfigService } from './config/aws.config';
 import { S3Service } from './services/s3.service';
 
-
+// Websocket socket-io
+import { ChatGateway } from './socket-io/chat.gateway';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -27,9 +28,9 @@ import { S3Service } from './services/s3.service';
     NarrativesModule, 
     PostsModule, 
     ResourcesModule,    
-    AuthModule
+    AuthModule,    
   ],
   controllers: [],  
-  providers: [AwsConfigService, S3Service],
+  providers: [AwsConfigService, S3Service, ChatGateway],
 })
 export class AppModule {}
