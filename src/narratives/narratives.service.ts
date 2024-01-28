@@ -7,6 +7,7 @@ import { UpdateNarrativeDTO } from './dto/updateNarrative.dto';
 import mongoose, { Model } from 'mongoose';
 import {Query} from 'express-serve-static-core';
 import { User } from '../auth/schemas/user.schema';
+import { UserPopulateDto } from 'src/auth/dto/userPopulate.dto';
 
 @Injectable()
 export class NarrativesService {
@@ -58,8 +59,8 @@ export class NarrativesService {
         return narrative;
     }
 
-    create(newNarrative: CreateNarrativeDTO, user:User):Promise<GetNarrativeDTO> {
-        const data = Object.assign(newNarrative, {created_by: user._id})
+    create(newNarrative: CreateNarrativeDTO, user:UserPopulateDto):Promise<GetNarrativeDTO> {        
+        const data = Object.assign(newNarrative, {created_by: user._id})        
         const narrative  = this.narrativeModel.create(data);
         return narrative;
     }

@@ -5,6 +5,8 @@ import { GetNarrativeDTO } from './dto/getNarrative.dto';
 import { MongoIdPipe } from './narratives.pipe';
 import { AuthGuard } from '@nestjs/passport';
 import { UpdateNarrativeDTO } from './dto/updateNarrative.dto';
+import { CreateNarrativeDTO } from './dto/createNarrative.dto';
+import mongoose from 'mongoose';
 
 @Controller('narratives')
 export class NarrativesController {
@@ -46,9 +48,12 @@ export class NarrativesController {
 
     @Post()
     @UseGuards(AuthGuard())
-    async create(@Body() newNarrative: GetNarrativeDTO, @Req() req): Promise<GetNarrativeDTO>{
-        const narrative = await this.narrativesService.create(newNarrative, req.user);
-
+    async create(@Body() newNarrative: CreateNarrativeDTO, @Req() req): Promise<GetNarrativeDTO>{
+        
+        const data = Object.assign(newNarrative, { _id: new mongoose.Types.ObjectId()})       
+        
+        const narrative = await this.narrativesService.create(data, req.user);
+        
         const response: GetNarrativeDTO = {
             _id: narrative._id,
             title: narrative.title,

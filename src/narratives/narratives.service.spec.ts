@@ -5,9 +5,11 @@ import { getModelToken } from '@nestjs/mongoose';
 import mongoose, { Document, Model } from 'mongoose';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { User } from '../auth/schemas/user.schema';
+
 import { CreateNarrativeDTO } from './dto/createNarrative.dto';
 import { UpdateNarrativeDTO } from './dto/updateNarrative.dto';
 import { GetNarrativeDTO } from './dto/getNarrative.dto';
+import { UserPopulateDto} from '../auth/dto/userPopulate.dto';
 
 describe('NarrativesService', () => {
     let narrativeService: NarrativesService;
@@ -30,7 +32,7 @@ describe('NarrativesService', () => {
         status: 'active',
         createdAt: new Date(),
         updatedAt: new Date()        
-    } as User;
+    } as UserPopulateDto;
 
     const mockNarrative = {
         _id: '61c0ccf11d7bf83d153d7c70',
@@ -91,7 +93,7 @@ describe('NarrativesService', () => {
 
             jest.spyOn(model, 'create').mockImplementationOnce( () => Promise.resolve([mockNarrative]));
             
-            const result = await narrativeService.create(newNarrative as CreateNarrativeDTO, mockUser as User);
+            const result = await narrativeService.create(newNarrative as CreateNarrativeDTO, mockUser as UserPopulateDto);
             
             expect(result).toEqual([mockNarrative]);
         });
